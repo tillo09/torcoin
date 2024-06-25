@@ -3,47 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TorCoin Game</title>
+    <title>TorCoin</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             text-align: center;
             padding: 50px;
+            /* background-color: #f8f8f8; */
         }
         button {
-            padding: 10px 20px;
+            padding: 12px 24px;
             font-size: 18px;
+            border: none;
+            cursor: pointer;
+            margin-top: 20px;
         }
         #coin-count {
             font-size: 24px;
             margin-top: 20px;
         }
+        #torcoin-image {
+            max-width: 100%;
+            margin-top: 30px;
+            border-radius: 50%;
+            width: 350px;
+            height: 350px;
+        }
     </style>
 </head>
 <body>
-    <h1>Welcome to TorCoin Game</h1>
-    <p>Click the button below to start collecting TorCoins!</p>
-    <button id="collect-button">Collect Coin</button>
-    <p id="coin-count">Coins collected: <span id="coins">0</span></p>
+    <button id="collect-button">Collect TorCoin
+        <img src="img/TorCoinLogo.png" alt="TorCoin" id="torcoin-image">
+    </button>
+    <p id="coin-count">TorCoins collected: <span id="coins">0</span></p>
 
     <script>
-        // Retrieve the previously stored coin count or default to 0
         let coinCount = parseInt(localStorage.getItem('coinCount')) || 0;
-        document.getElementById('coins').textContent = coinCount;
 
-        document.getElementById('collect-button').addEventListener('click', function() {
-            // Simulate collecting a coin (increase coin count)
-            coinCount++;
+        // Function to update the coin count display
+        function updateCoinCount() {
             document.getElementById('coins').textContent = coinCount;
+        }
 
-            // Save the updated coin count to localStorage
+        // Function to simulate collecting TorCoins
+        function collectTorCoin() {
+            coinCount++;
             localStorage.setItem('coinCount', coinCount.toString());
+            updateCoinCount();
 
-            // Check if the user has collected a certain number of coins
-            if (coinCount % 5 === 0) {
-                alert(`Congratulations! You have collected ${coinCount} TorCoins.`);
+            // Simulate interaction with the hamster (e.g., increase happiness, health, etc.)
+            console.log(`You collected 1 TorCoin! Total TorCoins: ${coinCount}`);
+
+            if (coinCount % 10 === 0) {
+                console.log(`Congratulations! You have collected ${coinCount} TorCoins.`);
             }
-        });
+        }
+
+        // Event listener for collecting TorCoins
+        document.getElementById('collect-button').addEventListener('click', collectTorCoin);
 
         // Optional: Initialize Telegram Web Apps SDK if needed
         // Telegram.WebApp.ready();
