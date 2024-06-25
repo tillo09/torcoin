@@ -1,7 +1,6 @@
 from telegram import Update, InlineKeyboardButton, InlineKeyboardMarkup, WebAppInfo
 from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes
 
-# Function to handle the /start command
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     message = """
 Привет! Добро пожаловать в TorCoin.
@@ -16,7 +15,6 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     reply_markup = InlineKeyboardMarkup(keyboard)
     await update.message.reply_text(message, reply_markup=reply_markup)
 
-# Function to handle the /help command
 async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     help_text = """
 Available commands:
@@ -26,18 +24,13 @@ Available commands:
 """
     await update.message.reply_text(help_text)
 
-# Function to handle the /price command
 async def price(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
-    # Here you can fetch the real price of TorCoin if it exists
-    # For demonstration, we'll use a fictional price
-    torcoin_price = 123.45  # Replace this with a real API call if available
+    torcoin_price = 123.45 
     await update.message.reply_text(f"The current price of TorCoin is ${torcoin_price}")
 
-# Your existing hello function
 async def hello(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     await update.message.reply_text(f'Hello {update.effective_user.first_name}')
 
-# Main function to set up the bot
 if __name__ == '__main__':
     app = ApplicationBuilder().token("7150776976:AAEWTttcrYHP5cni9r52dYBbx8RAmvzBsdM").build()
 
