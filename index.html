@@ -200,8 +200,8 @@
         let coinCount = parseInt(localStorage.getItem('coinCount')) || 0;
         let energyCount = parseInt(localStorage.getItem('energyCount')) || 1000;
         const maxEnergy = 1000;
-        const rechargeSteps = [1];
-        let rechargeIndex = 0;
+        const rechargeSteps = 1;  
+        const lastUpdatedKey = 'lastUpdated';
 
         function updateCoinCount() {
             document.getElementById('coins').textContent = coinCount.toLocaleString();
@@ -215,9 +215,10 @@
         function collectTorCoin() {
             if (energyCount > 0) {
                 coinCount++;
-                energyCount = Math.max(0, energyCount - 1);  // Decrease energy by 1 for each collection
+                energyCount = Math.max(0, energyCount - 1); 
                 localStorage.setItem('coinCount', coinCount.toString());
                 localStorage.setItem('energyCount', energyCount.toString());
+                localStorage.setItem(lastUpdatedKey, Date.now().toString());
                 updateCoinCount();
                 updateEnergyCount();
 
@@ -233,12 +234,16 @@
         }
 
         function rechargeEnergy() {
-            if (energyCount < maxEnergy) {
-                energyCount = Math.min(maxEnergy, energyCount + rechargeSteps[rechargeIndex]);
-                rechargeIndex = (rechargeIndex + 1) % rechargeSteps.length;
+            let lastUpdated = parseInt(localStorage.getItem(lastUpdatedKey)) || Date.now();
+            let now = Date.now();
+            let elapsedSeconds = Math.floor((now - lastUpdated) / 1000);
+
+            if (elapsedSeconds > 0) {
+                energyCount = Math.min(maxEnergy, energyCount + elapsedSeconds * rechargeSteps);
                 localStorage.setItem('energyCount', energyCount.toString());
+                localStorage.setItem(lastUpdatedKey, now.toString());
                 updateEnergyCount();
-                console.log(`Energy recharged by ${rechargeSteps[rechargeIndex]}%. Current energy: ${energyCount}`);
+                console.log(`Energy recharged by ${elapsedSeconds * rechargeSteps}. Current energy: ${energyCount}`);
             }
         }
 
@@ -246,8 +251,9 @@
 
         updateCoinCount();
         updateEnergyCount();
+        rechargeEnergy();  
 
-        setInterval(rechargeEnergy, 1000);  // Recharge energy every second
+        setInterval(rechargeEnergy, 1000); 
 
         function switchSection(event) {
             const switcher = event.currentTarget.getAttribute('data-switcher');
