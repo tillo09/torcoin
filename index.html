@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TorCoin Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome to TorCoin Game</h1>
+    <p>Click the button below to start playing!</p>
+    <button id="play-button">Start Game</button>
+
+    <script>
+        document.getElementById('play-button').addEventListener('click', function() {
+            alert('Game started! You can extend this with more game logic.');
+            // Here you can add more game logic or interaction with the Telegram Web Apps API
+        });
+
+        // Initialize Telegram Web Apps SDK
+        Telegram.WebApp.ready();
+    </script>
+</body>
+</html>
