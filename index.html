@@ -14,21 +14,34 @@
             padding: 10px 20px;
             font-size: 18px;
         }
+        #coin-count {
+            font-size: 24px;
+            margin-top: 20px;
+        }
     </style>
 </head>
 <body>
     <h1>Welcome to TorCoin Game</h1>
-    <p>Click the button below to start playing!</p>
-    <button id="play-button">Start Game</button>
+    <p>Click the button below to start collecting TorCoins!</p>
+    <button id="collect-button">Collect Coin</button>
+    <p id="coin-count">Coins collected: <span id="coins">0</span></p>
 
     <script>
-        document.getElementById('play-button').addEventListener('click', function() {
-            alert('Game started! You can extend this with more game logic.');
-            // Here you can add more game logic or interaction with the Telegram Web Apps API
+        let coinCount = 0;
+
+        document.getElementById('collect-button').addEventListener('click', function() {
+            // Simulate collecting a coin (increase coin count)
+            coinCount++;
+            document.getElementById('coins').textContent = coinCount;
+
+            // Check if the user has collected a certain number of coins
+            if (coinCount % 5 === 0) {
+                alert(`Congratulations! You have collected ${coinCount} TorCoins.`);
+            }
         });
 
-        // Initialize Telegram Web Apps SDK
-        Telegram.WebApp.ready();
+        // Optional: Initialize Telegram Web Apps SDK if needed
+        // Telegram.WebApp.ready();
     </script>
 </body>
 </html>
