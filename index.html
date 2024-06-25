@@ -4,140 +4,215 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TorCoin</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
-    body {
-    font-family: Arial, sans-serif;
-    text-align: center;
-    /* padding: 50px; */
-    background-color: #2c1539;
-    color: #fff;
-    }
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #1b0d23;
+            color: #fff;
+        }
 
-    .container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
 
-    #coin-count {
-        font-size: 36px;
-        margin-top: 20px;
-        background-color: #009688; 
-        color: #ffffff; 
-        padding: 25px 30px;
-        border-radius: 8px;
-        width: fit-content; 
-    }
+        #coin-count {
+            font-size: 36px;
+            margin-top: 20px;
+            background-color: #009688; 
+            color: #ffffff; 
+            padding: 25px 30px;
+            border-radius: 8px;
+            width: fit-content; 
+        }
 
-    #torcoin-image {
-        max-width: 200px; 
-        border-radius: 50%; 
-        margin-top: 20px;
-    }
+        #energy-count {
+            /* font-size: 24px; */
+            margin-top: 15px;
+            background-color: #ff9800;
+            color: #ffffff;
+            padding: 10px 15px;
+            border-radius: 8px;
+            width: fit-content;
+        }
 
-    .box-collect {
-        padding: 20px;
-    }
+        #torcoin-image {
+            max-width: 200px; 
+            border-radius: 50%; 
+            margin-top: 20px;
+        }
 
-    #collect-button {
-        padding: 12px 24px;
-        font-size: 18px;
-        cursor: pointer;
-        /* margin-top: 20px; */
-        background-color: #2c1539; 
-        color: #fff; 
-        border-radius: 8px;
-        border: none;
-    }
-    #collect-button:active{
-        transform: scale(1.1);
-    }
+        .box-collect {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            padding: 20px;
+        }
 
-    footer{
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 25px;   
-        margin-top: 10%;
-    }
+        #collect-button {
+            padding: 12px 24px;
+            font-size: 18px;
+            cursor: pointer;
+            background-color: #1b0d23; 
+            color: #fff; 
+            border-radius: 8px;
+            border: none;
+        }
 
-    .footer_box {
-        padding: 10px 15px;
-        background-color: #e0e0e0;
-        cursor: pointer;
-        background-color: #009688; 
-        color: #ffffff; 
-        border-radius: 8px;
-    }
+        #collect-button:active {
+            transform: scale(1.1);
+        }
 
-    .earn,
-    .boost,
-    .invite {
-        border: none;
-        background-color: #009688; 
-        color: #fff;
-        cursor: pointer;
-    }
+        footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 25px;   
+            margin-top: 10%;
+        }
+
+        .footer_box {
+            padding: 10px 15px;
+            cursor: pointer;
+            background-color: #009688; 
+            color: #ffffff; 
+            border-radius: 8px;
+        }
+
+        .earn, .boost, .invite {
+            border: none;
+            background-color: #009688; 
+            color: #fff;
+            cursor: pointer;
+        }
+
+        .section {
+            display: none;
+            margin-top: 20px;
+        }
+
+        .section.active {
+            display: block;
+        }
+
+        #what {
+            max-width: 50px; 
+            border-radius: 50%; 
+            /* margin-top: 20px; */
+        }
+
+        .coins {
+            text-align: center;
+            font-size: 35px;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="box-collect">
-            <p id="coin-count">Torcoins: <span id="coins">0</span></p>
+            <img id="what" src="img/TorCoinLogo.jpg" alt="error">
+            <span class="coins" id="coins">0</span>
         </div>
         <button id="collect-button">
-            <img src="img/TorCoinLogo.jpg" alt="TorCoin" id="torcoin-image">
+            <img style="position: relative; display: inline-block; pointer-events: none;" src="img/TorCoinLogo.jpg" alt="TorCoin" id="torcoin-image">
         </button>
+
+        <div id="energy-count">
+            <i class="fa-solid fa-bolt" style="color: #fff;"></i> : <span>1000 /</span> <span id="energy">1000</span>
+        </div>
+
 
         <footer class="footer">
             <div class="footer_box">
-                <button class="earn">earn</button>
+                <button class="earn" data-switcher="1">earn</button>
             </div>
             <div class="footer_box">
-                <button class="boost">boost</button>
+                <button class="boost" data-switcher="2">boost</button>
             </div>
             <div class="footer_box">
-                <button class="invite">invite</button>
+                <button class="invite" data-switcher="3">invite</button>
             </div>
         </footer>
 
-        <!-- responsive foot -->
-        <footer class="footer" style="display: none;">
-            <div class="earn_box">
-                <button class="earn">earn</button>
-            </div>
-            <div class="earn_box">
-                <button class="boost">boost</button>
-            </div>
-            <div class="earn_box">
-                <button class="invite">invite</button>
-            </div>
-        </footer>
-
+        <div id="section-1" class="section">
+            <p>Earn section content</p>
+        </div>
+        <div id="section-2" class="section">
+            <p>Boost section content</p>
+        </div>
+        <div id="section-3" class="section">
+            <p>Invite section content</p>
+        </div>
     </div>
 
     <script>
         let coinCount = parseInt(localStorage.getItem('coinCount')) || 0;
+        let energyCount = parseInt(localStorage.getItem('energyCount')) || 1000;
+        const maxEnergy = 1000;
+        const rechargeSteps = [1];
+        let rechargeIndex = 0;
 
         function updateCoinCount() {
             document.getElementById('coins').textContent = coinCount.toLocaleString();
         }
 
+        function updateEnergyCount() {
+            document.getElementById('energy').textContent = `${energyCount}`;
+        }
+
         function collectTorCoin() {
-            coinCount++;
-            localStorage.setItem('coinCount', coinCount.toString());
-            updateCoinCount();
+            if (energyCount > 0) {
+                coinCount++;
+                energyCount = Math.max(0, energyCount - 1);  // Decrease energy by 10% for each collection
+                localStorage.setItem('coinCount', coinCount.toString());
+                localStorage.setItem('energyCount', energyCount.toString());
+                updateCoinCount();
+                updateEnergyCount();
 
-            console.log(`You collected 1 TorCoin! Total TorCoins: ${coinCount}`);
+                console.log(`You collected 1 TorCoin! Total TorCoins: ${coinCount}`);
+                console.log(`Energy remaining: ${energyCount}%`);
 
-            if (coinCount % 10 === 0) {
-                console.log(`Congratulations! You have collected ${coinCount} TorCoins.`);
+                if (coinCount % 10 === 0) {
+                    console.log(`Congratulations! You have collected ${coinCount} TorCoins.`);
+                }
+            } else {
+                console.log("Not enough energy to collect TorCoin!");
+            }
+        }
+
+        function rechargeEnergy() {
+            if (energyCount < maxEnergy) {
+                energyCount = Math.min(maxEnergy, energyCount + rechargeSteps[rechargeIndex]);
+                rechargeIndex = (rechargeIndex + 1) % rechargeSteps.length;
+                localStorage.setItem('energyCount', energyCount.toString());
+                updateEnergyCount();
+                console.log(`Energy recharged by ${rechargeSteps[rechargeIndex]}%. Current energy: ${energyCount}%`);
             }
         }
 
         document.getElementById('collect-button').addEventListener('click', collectTorCoin);
 
         updateCoinCount();
+        updateEnergyCount();
+
+        setInterval(rechargeEnergy, 1000);  // Recharge energy every 5 seconds
+
+        function switchSection(event) {
+            const switcher = event.target.getAttribute('data-switcher');
+            document.querySelectorAll('.section').forEach(section => {
+                section.classList.remove('active');
+            });
+            document.getElementById(`section-${switcher}`).classList.add('active');
+        }
+
+        document.querySelectorAll('.footer_box button').forEach(button => {
+            button.addEventListener('click', switchSection);
+        });
     </script>
 </body>
 </html>
