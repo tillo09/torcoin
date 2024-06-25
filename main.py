@@ -10,7 +10,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
 Про друзей не забывай — зови их в игру и получайте вместе ещё больше монет!
 """
     keyboard = [
-        [InlineKeyboardButton("Играть в 1 клик 🐹", web_app=WebAppInfo(url='https://github.com/tillo09/torcoin.git'))]
+        [InlineKeyboardButton("Играть в 1 клик 🐹", web_app=WebAppInfo(url='https://tillo09.github.io/torcoin/'))]
     ]
     reply_markup = InlineKeyboardMarkup(keyboard)
     await update.message.reply_text(message, reply_markup=reply_markup)
