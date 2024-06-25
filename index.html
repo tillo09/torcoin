@@ -27,12 +27,17 @@
     <p id="coin-count">Coins collected: <span id="coins">0</span></p>
 
     <script>
-        let coinCount = 0;
+        // Retrieve the previously stored coin count or default to 0
+        let coinCount = parseInt(localStorage.getItem('coinCount')) || 0;
+        document.getElementById('coins').textContent = coinCount;
 
         document.getElementById('collect-button').addEventListener('click', function() {
             // Simulate collecting a coin (increase coin count)
             coinCount++;
             document.getElementById('coins').textContent = coinCount;
+
+            // Save the updated coin count to localStorage
+            localStorage.setItem('coinCount', coinCount.toString());
 
             // Check if the user has collected a certain number of coins
             if (coinCount % 5 === 0) {
