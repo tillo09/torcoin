@@ -30,13 +30,40 @@
         }
 
         #energy-count {
-            /* font-size: 24px; */
             margin-top: 15px;
             background-color: #ff9800;
             color: #ffffff;
             padding: 10px 15px;
             border-radius: 8px;
             width: fit-content;
+        }
+
+        #energy-percentage {
+            font-size: 18px;
+            margin-top: 5px;
+            color: #ffffff;
+        }
+
+        .progress-container {
+            width: 80%;
+            margin: 20px auto;
+        }
+
+        .progress-bar {
+            display: flex;
+            height: 20px;
+            background-color: #efefef;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-bar span {
+            display: block;
+            height: 100%;
+        }
+
+        .energy-progress {
+            background-color: #29af00;
         }
 
         #torcoin-image {
@@ -61,33 +88,36 @@
             color: #fff; 
             border-radius: 8px;
             border: none;
+            transition: all 0.1s;
         }
 
         #collect-button:active {
-            transform: scale(1.1);
+            transform: scale(1.01);
         }
 
         footer {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: 25px;   
-            margin-top: 10%;
+            gap: 50px;   
+            margin-top: 20%;
         }
 
         .footer_box {
-            padding: 10px 15px;
             cursor: pointer;
-            background-color: #009688; 
             color: #ffffff; 
+            width: 50px;    
+        }
+
+        .footer_box:active {
+            background-color: #c6c6c640; 
             border-radius: 8px;
         }
 
         .earn, .boost, .invite {
-            border: none;
-            background-color: #009688; 
             color: #fff;
-            cursor: pointer;
+            font-size: 12px;
+            margin-top: -18px;
         }
 
         .section {
@@ -99,10 +129,9 @@
             display: block;
         }
 
-        #what {
+        #TorcoinLogo {
             max-width: 50px; 
             border-radius: 50%; 
-            /* margin-top: 20px; */
         }
 
         .coins {
@@ -110,43 +139,60 @@
             font-size: 35px;
             font-weight: bold;
         }
+
+        .icons_btn {
+            font-size: 27px;
+        }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="box-collect">
-            <img id="what" src="img/TorCoinLogo.jpg" alt="error">
-            <span class="coins" id="coins">0</span>
-        </div>
-        <button id="collect-button">
-            <img style="position: relative; display: inline-block; pointer-events: none;" src="img/TorCoinLogo.jpg" alt="TorCoin" id="torcoin-image">
-        </button>
-
-        <div id="energy-count">
-            <i class="fa-solid fa-bolt" style="color: #fff;"></i> : <span>1000 /</span> <span id="energy">1000</span>
-        </div>
-
-
-        <footer class="footer">
-            <div class="footer_box">
-                <button class="earn" data-switcher="1">earn</button>
+    <div class="main_body">
+        <div class="container">
+            <div class="box-collect">
+                <img id="TorcoinLogo" src="img/TorCoinLogo.jpg" alt="error">
+                <span class="coins" id="coins">0</span>
             </div>
-            <div class="footer_box">
-                <button class="boost" data-switcher="2">boost</button>
+    
+            <button id="collect-button">
+                <img style="position: relative; display: inline-block; pointer-events: none;" src="img/TorCoinLogo.jpg" alt="TorCoin" id="torcoin-image">
+            </button>
+    
+            <div id="energy-count">
+                <i class="fa-solid fa-bolt" style="color: #fff;"></i> : <span id="energy">1000</span> / <span>1000</span>
             </div>
-            <div class="footer_box">
-                <button class="invite" data-switcher="3">invite</button>
-            </div>
-        </footer>
 
-        <div id="section-1" class="section">
-            <p>Earn section content</p>
-        </div>
-        <div id="section-2" class="section">
-            <p>Boost section content</p>
-        </div>
-        <div id="section-3" class="section">
-            <p>Invite section content</p>
+            <div class="progress-container">
+                <div class="progress-bar">
+                    <span id="energy-progress" class="energy-progress" style="width: 100%;"></span>
+                </div>
+            </div>
+    
+            <footer class="footer">
+                <div class="footer_box" data-switcher="1">
+                    <p class="icons_btn">💰</p>
+                    <p class="earn">earn</p>
+                </div>
+                <div class="footer_box" data-switcher="2">
+                    <p class="icons_btn">🚀</p>
+                    <p class="boost">boost</p>
+                </div>
+                <div class="footer_box" data-switcher="3">
+                    <p class="icons_btn">👫</p>
+                    <p class="invite">invite</p>
+                </div>
+            </footer>
+    
+            <div id="foot" style="display: none;">
+                <div id="section-1" class="section">
+                    <p>Earn section content</p>
+                </div>
+                <div id="section-2" class="section">
+                    <p>Boost section content</p>
+                </div>
+                <div id="section-3" class="section">
+                    <p>Invite section content</p>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -162,13 +208,14 @@
         }
 
         function updateEnergyCount() {
-            document.getElementById('energy').textContent = `${energyCount}`;
+            document.getElementById('energy').textContent = energyCount;
+            document.getElementById('energy-progress').style.width = `${(energyCount / maxEnergy) * 100}%`;
         }
 
         function collectTorCoin() {
             if (energyCount > 0) {
                 coinCount++;
-                energyCount = Math.max(0, energyCount - 1);  // Decrease energy by 10% for each collection
+                energyCount = Math.max(0, energyCount - 1);  // Decrease energy by 1 for each collection
                 localStorage.setItem('coinCount', coinCount.toString());
                 localStorage.setItem('energyCount', energyCount.toString());
                 updateCoinCount();
@@ -191,7 +238,7 @@
                 rechargeIndex = (rechargeIndex + 1) % rechargeSteps.length;
                 localStorage.setItem('energyCount', energyCount.toString());
                 updateEnergyCount();
-                console.log(`Energy recharged by ${rechargeSteps[rechargeIndex]}%. Current energy: ${energyCount}%`);
+                console.log(`Energy recharged by ${rechargeSteps[rechargeIndex]}%. Current energy: ${energyCount}`);
             }
         }
 
@@ -200,18 +247,18 @@
         updateCoinCount();
         updateEnergyCount();
 
-        setInterval(rechargeEnergy, 1000);  // Recharge energy every 5 seconds
+        setInterval(rechargeEnergy, 1000);  // Recharge energy every second
 
         function switchSection(event) {
-            const switcher = event.target.getAttribute('data-switcher');
+            const switcher = event.currentTarget.getAttribute('data-switcher');
             document.querySelectorAll('.section').forEach(section => {
                 section.classList.remove('active');
             });
             document.getElementById(`section-${switcher}`).classList.add('active');
         }
 
-        document.querySelectorAll('.footer_box button').forEach(button => {
-            button.addEventListener('click', switchSection);
+        document.querySelectorAll('.footer_box').forEach(footer_box => {
+            footer_box.addEventListener('click', switchSection);
         });
     </script>
 </body>
