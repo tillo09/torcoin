@@ -30,7 +30,7 @@ async def help_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> No
     await update.message.reply_text(help_text)
 
 if __name__ == '__main__':
-    app = ApplicationBuilder().token("YOUR_BOT_TOKEN").build()
+    app = ApplicationBuilder().token("7150776976:AAEWTttcrYHP5cni9r52dYBbx8RAmvzBsdM").build()
 
     app.add_handler(CommandHandler("start", start))
     app.add_handler(CommandHandler("help", help_command))
