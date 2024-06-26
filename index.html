@@ -67,16 +67,17 @@
         }
 
         #torcoin-image {
-            max-width: 200px; 
+            max-width: 250px; 
             border-radius: 50%; 
             margin-top: 20px;
+            pointer-events: none;
         }
 
         .box-collect {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 15px;
+            /* gap: 15px; */
             padding: 20px;
         }
 
@@ -84,15 +85,15 @@
             padding: 12px 24px;
             font-size: 18px;
             cursor: pointer;
-            background-color: #1b0d23; 
-            color: #fff; 
+            background-color: transparent; 
             border-radius: 8px;
             border: none;
             transition: all 0.1s;
         }
 
-        #collect-button:active {
-            transform: scale(1.01);
+        #collect-button:focus, #collect-button:active {
+            outline: none; 
+            background-color: transparent !important; 
         }
 
         footer {
@@ -130,7 +131,7 @@
         }
 
         #TorcoinLogo {
-            max-width: 50px; 
+            max-width: 80px; 
             border-radius: 50%; 
         }
 
@@ -149,13 +150,13 @@
     <div class="main_body">
         <div class="container">
             <div class="box-collect">
-                <img id="TorcoinLogo" src="img/TorCoinLogo.jpg" alt="error">
+                <img id="TorcoinLogo" src="img/Untitled image.png" alt="error">
                 <span class="coins" id="coins">0</span>
             </div>
     
             <button id="collect-button">
-                <img style="position: relative; display: inline-block; pointer-events: none;" src="img/TorCoinLogo.jpg" alt="TorCoin" id="torcoin-image">
-            </button>
+                <img style="position: relative; display: inline-block; pointer-events: none;" src="img/Untitled image.png" alt="TorCoin" id="torcoin-image">
+            </button> 
     
             <div id="energy-count">
                 <i class="fa-solid fa-bolt" style="color: #fff;"></i> : <span id="energy">1000</span> / <span>1000</span>
