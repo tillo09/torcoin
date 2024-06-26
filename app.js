@@ -67,3 +67,8 @@ function switchSection(event) {
 document.querySelectorAll('.footer_box').forEach(footer_box => {
     footer_box.addEventListener('click', switchSection);
 });
+
+const isMobile = /Mobile|Android|iPhone/i.test(navigator.userAgent);
+if (!isMobile) {
+    document.body.innerHTML = '<p>Sorry, this game is only available on mobile devices.</p>';
+}
