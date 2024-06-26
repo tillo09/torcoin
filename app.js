@@ -82,3 +82,25 @@ function initializeGame() {
         footer_box.addEventListener('click', switchSection);
     });
 }
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Your existing code for Torcoin functionality
+
+    // Function to handle invite action
+    function inviteFriend() {
+        let friendUsername = document.getElementById('invite-input').value.trim();
+
+        if (friendUsername) {
+            // Assuming invite success, update UI message (you can replace with actual backend logic)
+            document.getElementById('invite-message').textContent = `Invited ${friendUsername} successfully!`;
+
+            // You can add logic here to update invite count on backend or perform other actions
+        } else {
+            document.getElementById('invite-message').textContent = 'Please enter a valid username or ID.';
+        }
+    }
+
+    // Event listener for invite button click
+    document.getElementById('invite-button').addEventListener('click', inviteFriend);
+});
+
