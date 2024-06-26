@@ -18,7 +18,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     """
     keyboard = [
         [InlineKeyboardButton("Play Torcoin", web_app=WebAppInfo(url='https://tillo09.github.io/torcoin/'))]
-        [InlineKeyboardButton("Join our Telegram Channel", url='https://t.me/torcoins_community')]
+        # [InlineKeyboardButton("Join our Telegram Channel", url='https://t.me/torcoins_community')]
     ]
     reply_markup = InlineKeyboardMarkup(keyboard)
     await update.message.reply_text(message, reply_markup=reply_markup)
