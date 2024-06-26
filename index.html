@@ -3,147 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TorCoin</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            background-color: #1b0d23;
-            color: #fff;
-        }
-
-        .container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        #coin-count {
-            font-size: 36px;
-            margin-top: 20px;
-            background-color: #009688; 
-            color: #ffffff; 
-            padding: 25px 30px;
-            border-radius: 8px;
-            width: fit-content; 
-        }
-
-        #energy-count {
-            margin-top: 15px;
-            background-color: #ff9800;
-            color: #ffffff;
-            padding: 10px 15px;
-            border-radius: 8px;
-            width: fit-content;
-        }
-
-        #energy-percentage {
-            font-size: 18px;
-            margin-top: 5px;
-            color: #ffffff;
-        }
-
-        .progress-container {
-            width: 80%;
-            margin: 20px auto;
-        }
-
-        .progress-bar {
-            display: flex;
-            height: 20px;
-            background-color: #efefef;
-            border-radius: 10px;
-            overflow: hidden;
-        }
-
-        .progress-bar span {
-            display: block;
-            height: 100%;
-        }
-
-        .energy-progress {
-            background-color: #29af00;
-        }
-
-        #torcoin-image {
-            max-width: 200px; 
-            border-radius: 50%; 
-            margin-top: 20px;
-        }
-
-        .box-collect {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 15px;
-            padding: 20px;
-        }
-
-        #collect-button {
-            padding: 12px 24px;
-            font-size: 18px;
-            cursor: pointer;
-            background-color: #1b0d23; 
-            color: #fff; 
-            border-radius: 8px;
-            border: none;
-            transition: all 0.1s;
-        }
-
-        #collect-button:active {
-            transform: scale(1.01);
-        }
-
-        footer {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 50px;   
-            margin-top: 5%;
-        }
-
-        .footer_box {
-            cursor: pointer;
-            color: #ffffff; 
-            width: 50px;    
-        }
-
-        .footer_box:active {
-            background-color: #c6c6c640; 
-            border-radius: 8px;
-        }
-
-        .earn, .boost, .invite {
-            color: #fff;
-            font-size: 12px;
-            margin-top: -18px;
-        }
-
-        .section {
-            display: none;
-            margin-top: 20px;
-        }
-
-        .section.active {
-            display: block;
-        }
-
-        #TorcoinLogo {
-            max-width: 50px; 
-            border-radius: 50%; 
-        }
-
-        .coins {
-            text-align: center;
-            font-size: 35px;
-            font-weight: bold;
-        }
-
-        .icons_btn {
-            font-size: 27px;
-        }
-    </style>
+    <title>Torcoin</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" /> 
 </head>
 <body>
     <div class="main_body">
@@ -184,88 +46,18 @@
     
             <div id="foot" style="display: none;">
                 <div id="section-1" class="section">
-                    <p>Earn section content</p>
+                    <p>Coming soon</p>
                 </div>
                 <div id="section-2" class="section">
-                    <p>Boost section content</p>
+                    <p>Coming soon</p>
                 </div>
                 <div id="section-3" class="section">
-                    <p>Invite section content</p>
+                    <p>Coming soon</p>
                 </div>
             </div>
         </div>
     </div>
 
-    <script>
-        let coinCount = parseInt(localStorage.getItem('coinCount')) || 0;
-        let energyCount = parseInt(localStorage.getItem('energyCount')) || 1000;
-        const maxEnergy = 1000;
-        const rechargeSteps = 1;  
-        const lastUpdatedKey = 'lastUpdated';
-
-        function updateCoinCount() {
-            document.getElementById('coins').textContent = coinCount.toLocaleString();
-        }
-
-        function updateEnergyCount() {
-            document.getElementById('energy').textContent = energyCount;
-            document.getElementById('energy-progress').style.width = `${(energyCount / maxEnergy) * 100}%`;
-        }
-
-        function collectTorCoin() {
-            if (energyCount > 0) {
-                coinCount++;
-                energyCount = Math.max(0, energyCount - 1); 
-                localStorage.setItem('coinCount', coinCount.toString());
-                localStorage.setItem('energyCount', energyCount.toString());
-                localStorage.setItem(lastUpdatedKey, Date.now().toString());
-                updateCoinCount();
-                updateEnergyCount();
-
-                console.log(`You collected 1 TorCoin! Total TorCoins: ${coinCount}`);
-                console.log(`Energy remaining: ${energyCount}%`);
-
-                if (coinCount % 10 === 0) {
-                    console.log(`Congratulations! You have collected ${coinCount} TorCoins.`);
-                }
-            } else {
-                console.log("Not enough energy to collect TorCoin!");
-            }
-        }
-
-        function rechargeEnergy() {
-            let lastUpdated = parseInt(localStorage.getItem(lastUpdatedKey)) || Date.now();
-            let now = Date.now();
-            let elapsedSeconds = Math.floor((now - lastUpdated) / 1000);
-
-            if (elapsedSeconds > 0) {
-                energyCount = Math.min(maxEnergy, energyCount + elapsedSeconds * rechargeSteps);
-                localStorage.setItem('energyCount', energyCount.toString());
-                localStorage.setItem(lastUpdatedKey, now.toString());
-                updateEnergyCount();
-                console.log(`Energy recharged by ${elapsedSeconds * rechargeSteps}. Current energy: ${energyCount}`);
-            }
-        }
-
-        document.getElementById('collect-button').addEventListener('click', collectTorCoin);
-
-        updateCoinCount();
-        updateEnergyCount();
-        rechargeEnergy();  
-
-        setInterval(rechargeEnergy, 1000); 
-
-        function switchSection(event) {
-            const switcher = event.currentTarget.getAttribute('data-switcher');
-            document.querySelectorAll('.section').forEach(section => {
-                section.classList.remove('active');
-            });
-            document.getElementById(`section-${switcher}`).classList.add('active');
-        }
-
-        document.querySelectorAll('.footer_box').forEach(footer_box => {
-            footer_box.addEventListener('click', switchSection);
-        });
-    </script>
+    <script src="app.js"></script>
 </body>
 </html>

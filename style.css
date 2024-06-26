@@ -1,0 +1,137 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #1b0d23;
+    color: #fff;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#coin-count {
+    font-size: 36px;
+    margin-top: 20px;
+    background-color: #009688; 
+    color: #ffffff; 
+    padding: 25px 30px;
+    border-radius: 8px;
+    width: fit-content; 
+}
+
+#energy-count {
+    margin-top: 15px;
+    background-color: #ff9800;
+    color: #ffffff;
+    padding: 10px 15px;
+    border-radius: 8px;
+    width: fit-content;
+}
+
+#energy-percentage {
+    font-size: 18px;
+    margin-top: 5px;
+    color: #ffffff;
+}
+
+.progress-container {
+    width: 80%;
+    margin: 20px auto;
+}
+
+.progress-bar {
+    display: flex;
+    height: 20px;
+    background-color: #efefef;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.progress-bar span {
+    display: block;
+    height: 100%;
+}
+
+.energy-progress {
+    background-color: #29af00;
+}
+
+#torcoin-image {
+    max-width: 200px; 
+    border-radius: 50%; 
+    margin-top: 20px;
+}
+
+.box-collect {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    padding: 20px;
+}
+
+#collect-button {
+    padding: 12px 24px;
+    font-size: 18px;
+    cursor: pointer;
+    background-color: #1b0d23; 
+    color: #fff; 
+    border-radius: 8px;
+    border: none;
+    transition: all 0.1s;
+}
+
+#collect-button:active {
+    transform: scale(1.01);
+}
+
+footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 50px;   
+    margin-top: 5%;
+}
+
+.footer_box {
+    cursor: pointer;
+    color: #ffffff; 
+    width: 50px;    
+}
+
+.footer_box:active {
+    background-color: #c6c6c640; 
+    border-radius: 8px;
+}
+
+.earn, .boost, .invite {
+    color: #fff;
+    font-size: 12px;
+    margin-top: -18px;
+}
+
+.section {
+    display: none;
+    margin-top: 20px;
+}
+
+.section.active {
+    display: block;
+}
+
+#TorcoinLogo {
+    max-width: 50px; 
+    border-radius: 50%; 
+}
+
+.coins {
+    text-align: center;
+    font-size: 35px;
+    font-weight: bold;
+}
+
+.icons_btn {
+    font-size: 27px;
+}
