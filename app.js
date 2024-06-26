@@ -82,4 +82,3 @@ function initializeGame() {
         footer_box.addEventListener('click', switchSection);
     });
 }
-
