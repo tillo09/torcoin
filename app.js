@@ -11,7 +11,7 @@ function initializeGame() {
     let coinCount = parseInt(localStorage.getItem('coinCount')) || 0;
     let energyCount = parseInt(localStorage.getItem('energyCount')) || 1000;
     const maxEnergy = 1000;
-    const rechargeSteps = 1;  
+    const rechargeSteps = 1;
     const lastUpdatedKey = 'lastUpdated';
 
     function updateCoinCount() {
@@ -26,21 +26,21 @@ function initializeGame() {
     function collectTorCoin() {
         if (energyCount > 0) {
             coinCount++;
-            energyCount = Math.max(0, energyCount - 1); 
+            energyCount = Math.max(0, energyCount - 1);
             localStorage.setItem('coinCount', coinCount.toString());
             localStorage.setItem('energyCount', energyCount.toString());
             localStorage.setItem(lastUpdatedKey, Date.now().toString());
             updateCoinCount();
             updateEnergyCount();
 
-            console.log(`You collected 1 TorCoin! Total TorCoins: ${coinCount}`);
+            console.log(`You collected 1 Torcoin! Total Torcoins: ${coinCount}`);
             console.log(`Energy remaining: ${energyCount}%`);
 
             if (coinCount % 10 === 0) {
-                console.log(`Congratulations! You have collected ${coinCount} TorCoins.`);
+                console.log(`Congratulations! You have collected ${coinCount} Torcoins.`);
             }
         } else {
-            console.log("Not enough energy to collect TorCoin!");
+            console.log("Not enough energy to collect Torcoin!");
         }
     }
 
@@ -49,12 +49,16 @@ function initializeGame() {
         let now = Date.now();
         let elapsedSeconds = Math.floor((now - lastUpdated) / 1000);
 
-        if (elapsedSeconds > 0) {
-            energyCount = Math.min(maxEnergy, energyCount + elapsedSeconds * rechargeSteps);
+        if (elapsedSeconds > 0 && energyCount < maxEnergy) {
+            let newEnergyCount = Math.min(maxEnergy, energyCount + elapsedSeconds * rechargeSteps);
+            let rechargeAmount = newEnergyCount - energyCount;
+            energyCount = newEnergyCount;
             localStorage.setItem('energyCount', energyCount.toString());
             localStorage.setItem(lastUpdatedKey, now.toString());
             updateEnergyCount();
-            console.log(`Energy recharged by ${elapsedSeconds * rechargeSteps}. Current energy: ${energyCount}`);
+            if (rechargeAmount > 0) {
+                console.log(`Energy recharged by ${rechargeAmount}. Current energy: ${energyCount}`);
+            }
         }
     }
 
@@ -62,7 +66,7 @@ function initializeGame() {
 
     updateCoinCount();
     updateEnergyCount();
-    rechargeEnergy();  
+    rechargeEnergy();
 
     setInterval(rechargeEnergy, 1000);
 
