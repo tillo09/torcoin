@@ -75,12 +75,14 @@ body {
 #collect-button {
     padding: 12px 24px;
     font-size: 18px;
-    cursor: pointer;
+    /* cursor: pointer; */
     background-color: #1b0d23; 
-    color: #fff; 
+    /* border: none; */
+    /* color: #fff;  */
     border-radius: 8px;
-    border: none;
+    border: none;   
     transition: all 0.1s;
+    border-radius: 50%;
 }
 
 #collect-button:active {
