@@ -26,18 +26,3 @@ if __name__ == '__main__':
     app.add_handler(CommandHandler("help", help_command))
 
     app.run_polling()
-
-from flask import Flask, request, redirect
-
-app = Flask(__name__)
-
-@app.route('/check-device')
-def check_device():
-    user_agent = request.headers.get('User-Agent')
-    if 'Mobile' in user_agent or 'Android' in user_agent or 'iPhone' in user_agent:
-        return redirect('https://tillo09.github.io/torcoin/')
-    else:
-        return "Sorry, this game is only available on mobile devices."
-
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)
