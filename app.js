@@ -81,15 +81,4 @@ function initializeGame() {
     document.querySelectorAll('.footer_box').forEach(footer_box => {
         footer_box.addEventListener('click', switchSection);
     });
-
-    // Add event listener for invite button
-    document.getElementById('invite-button').addEventListener('click', function() {
-        const switcher = this.getAttribute('data-switcher');
-        document.querySelectorAll('.section').forEach(section => {
-            section.classList.remove('active');
-        });
-        document.getElementById(`section-${switcher}`).classList.add('active');
-        // Automatically click the invite link
-        document.getElementById('telegram-invite-link').click();
-    });
 }
